@@ -1,6 +1,6 @@
 # 基于Docker的Elasticsearch6服务器集群搭建
 ES版本： 6.5.4
-Docker Desktop 4.7.1 
+Docker 4.7.1 
 
 ~~~sh
 # 重新部署并启动集群
@@ -112,9 +112,19 @@ jvm.options 文件中对内存的使用做了调整，128m 为本地开发环境
 
 
 
+## Elasticsearch数据可视化工具elasticsearch-head配置
+
+这里使用chrome插件的方式，插件代码位于 chrome_ext/es-head
+安装方法为打开chrome扩展程序管理，加载已解压的扩展程序 选择上面的目录即可安装成功！
+
+
+
+![es-head-chrome](./docs/es-head-chrome.png)
+
 
 
 ## ES集群磁盘使用配置
+
 https://www.elastic.co/guide/en/elasticsearch/reference/6.5/disk-allocator.html
 
 elasticsearch.yml配置文件中
@@ -157,8 +167,9 @@ PUT _cluster/settings
 ~~~
 表示磁盘最少有1g可用空间，可用空间小于500m时ES会将其从节点重新分配，节点最少保留500m可用空间
 
+## 集群节点 
 
-## 集群节点 ELasticsearch的集群是由多个节点组成的，通过cluster.name设置集群名称，并且用于区分其它的集群，每个节点通过node.name指定节点的名称。 在Elasticsearch中，节点的类型主要有4种:
+ELasticsearch的集群是由多个节点组成的，通过cluster.name设置集群名称，并且用于区分其它的集群，每个节点通过node.name指定节点的名称。 在Elasticsearch中，节点的类型主要有4种:
 
 - master节点
 

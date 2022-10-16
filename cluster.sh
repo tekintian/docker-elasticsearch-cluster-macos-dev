@@ -5,6 +5,9 @@ docker rm -f es-node00
 docker rm -f es-node01
 docker rm -f es-node02
 
+#del the dsfile
+rm -rf $PWD/plugins/.DS_Store
+
 # http://192.168.2.8:9200/_cluster/health
 # -p 9200:9200 -p 9300:9300 
 # 如果本地磁盘空间使用已经超过85%，/usr/share/elasticsearch/data加载到本地需要重新设置磁盘使用策略，否则数据不可写

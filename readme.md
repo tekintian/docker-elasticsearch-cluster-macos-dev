@@ -48,7 +48,7 @@ docker run -itd --name es-node00 -p 9200:9200 -p 9300:9300 \
 ~~~
 - 加载目录说明
 $PWD/plugins  config 为集群中所有的节点共享的数据
-plugins 为插件
+plugins 为集群共享插件，后续需要添加其他插件，直接解压到这个目录，重启容器即可！
 config/ingest-geoip 这个是geoip数据库，最新的数据库可以从这里下载 https://github.com/P3TERX/GeoLite.mmdb/releases
 默认的数据库路径 /usr/share/elasticsearch/config/ingest-geoip
 
@@ -61,6 +61,9 @@ docker cp -a es-node00:/usr/share/elasticsearch/plugins plugins
 ##IK分词下载安装
 wget -O ik-654.zip https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.5.4/elasticsearch-analysis-ik-6.5.4.zip
 unzip -d plugins/ik ik-654.zip # 解压ik-654.zip到plugins/ik文件夹
+
+wget -O pinyin-654.zip https://github.com/medcl/elasticsearch-analysis-pinyin/releases/download/v6.5.4/elasticsearch-analysis-pinyin-6.5.4.zip
+unzip -d plugins/pinyin pinyin-654.zip # 解压pinyin-654.zip到plugins/pinyin文件夹
 ~~~
 
 ## elasticsearch.yml 配置文件

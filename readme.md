@@ -1,5 +1,5 @@
 # 基于Docker的可视化Elasticsearch服务器集群搭建
-用于一键搭建基于docker容器的可视化的elasticsearch集群开发/生产环境！
+用于在macos/linux上面一键搭建基于docker容器的可视化的elasticsearch集群开发/生产环境！
 
 ES版本： 6.5.4   Docker 4.7.1 
 

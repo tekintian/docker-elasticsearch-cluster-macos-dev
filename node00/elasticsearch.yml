@@ -1,0 +1,28 @@
+cluster.name: "docker-cluster" #集群名称，集群中的所有节点的这个集群名称必须保持一致，因为ES是通过这个名称来发现其他ES节点的
+network.host: 0.0.0.0
+
+# minimum_master_nodes need to be explicitly set when bound on a public IP
+# set to 1 to allow single node clusters
+# Details: https://github.com/elastic/elasticsearch/pull/17288
+# 注意，这里如果是单机则默认为1， 如果是集群部署需要根据集群node的数量来设置，计算公式：(N/2)+1，N为集群中节点数
+discovery.zen.minimum_master_nodes: 2
+
+node.name: node00 # 节点名称，集群中的每个节点名称必须唯一
+node.master: true # 这里设置为true即表示当前节点有机会被选举为master, false这表示当前节点为子节点
+node.data: true # 数据节点
+http.port: 9200 # 这里的端口，如果docker运行模式为 --net host 则其他的节点需要修改这个端口，以便在主机能暴露出来
+# zen discovery集群广播，transport 通信端口默认是9300， 这里的是集群中其他节点的地址，ES通过这里的配置来与其他节点通信 
+# 目前ES是3个节点，所以有3个地址
+discovery.zen.ping.unicast.hosts: ["192.168.2.8:9300","192.168.2.8:9301","192.168.2.8:9302"]
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+
+# 磁盘分配策略 这里的空间大小需要根据服务器的使用空间来进行调整。 注意这里设置不当可能会导致ES无法写入数据
+# https://www.elastic.co/guide/en/elasticsearch/reference/6.5/disk-allocator.html
+# 默认true,如果设置为false 则禁用磁盘分配策略，建议仅开发环境时设置为 false
+cluster.routing.allocation.disk.threshold_enabled: true 
+# 磁盘分配策略配置
+cluster.routing.allocation.disk.watermark.low: "1g"
+cluster.routing.allocation.disk.watermark.high: "500m"
+cluster.routing.allocation.disk.watermark.flood_stage: "500m"
+cluster.info.update.interval: "1m"

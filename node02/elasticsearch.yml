@@ -1,0 +1,26 @@
+cluster.name: "docker-cluster"
+network.host: 0.0.0.0
+
+# minimum_master_nodes need to be explicitly set when bound on a public IP
+# set to 1 to allow single node clusters
+# Details: https://github.com/elastic/elasticsearch/pull/17288
+# 注意，这里如果是单机则默认为1， 如果是集群部署需要根据集群node的数量来设置，计算公式：(N/2)+1，N为集群中节点数
+discovery.zen.minimum_master_nodes: 2
+
+node.name: node02
+node.master: true
+node.data: true
+http.port: 9202
+discovery.zen.ping.unicast.hosts: ["192.168.2.8:9300","192.168.2.8:9301","192.168.2.8:9302"]
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+
+# 磁盘分配策略 这里的空间大小需要根据服务器的使用空间来进行调整 注意这里设置不当可能会导致ES无法写入数据
+# https://www.elastic.co/guide/en/elasticsearch/reference/6.5/disk-allocator.html
+# 默认true,如果设置为false 则禁用磁盘分配策略，建议仅开发环境时设置为 false
+cluster.routing.allocation.disk.threshold_enabled: true 
+# 磁盘分配策略配置
+cluster.routing.allocation.disk.watermark.low: "1g"
+cluster.routing.allocation.disk.watermark.high: "500m"
+cluster.routing.allocation.disk.watermark.flood_stage: "500m"
+cluster.info.update.interval: "1m"

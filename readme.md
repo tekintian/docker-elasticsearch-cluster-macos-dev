@@ -1,9 +1,14 @@
-# 基于Docker的Elasticsearch6服务器集群搭建
-ES版本： 6.5.4
-Docker 4.7.1 
+# 基于Docker的可视化Elasticsearch服务器集群搭建
+用于一键搭建基于docker容器的可视化的elasticsearch集群开发/生产环境！
+
+ES版本： 6.5.4   Docker 4.7.1 
+
+可视化工具： elasticsearch-head chrome扩展程序
+
+
 
 ~~~sh
-# 重新部署并启动集群
+# 重新部署并启动集群 一键搭建基于docker容器的可视化的elasticsearch集群开发/生产环境
 sh cluster.sh
 
 # 查看日志
@@ -20,7 +25,10 @@ docker stop es-node00 es-node01 es-node02
 docker diff es-node00
 ~~~
 
+
+
 ## docker参数说明
+
 -itd 表示后台交互式运行
 --name 指定容器名称
 -p 端口映射 本地端口:容器端口
